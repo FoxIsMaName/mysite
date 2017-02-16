@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<body bgcolor="#00afff" >
+    {% if error_message %}
+        <h1> Please,insert your choice</h1>
+    {% else %}
+        <h1> choice has been add</h1>
+        <br>{{choice}}
+    {% endif %}
+    <br><a href="{% url 'polls:index' %}">back</a>
+</body>
+</html>

@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<body bgcolor="#00afff" >
+<h1>Add Choice</h1>
+<h2>your question,you want to add choice is :{{ question.question_text }}</h2>
+
+<form action="{% url 'polls:saveChoice' question.id %}" method="post">
+    {% csrf_token %}
+    <input type="text" name="choice" />
+    <input type="submit" value="add choice" /><br>
+</form>
+</body>
+</html>

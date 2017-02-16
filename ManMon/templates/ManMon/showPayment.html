@@ -1,0 +1,31 @@
+<html>
+<body bgcolor="#dcbf34" >
+<h1>Payment List</h1>
+
+
+{% if payment_list %}
+<table border=1 style="width:50%">
+        <tr>
+            <td>note</td>
+            <td>payment</td>
+            <td>date</td>
+        </tr>
+    {% for payment in payment_list %}
+        <tr>
+            <td>{{ payment.payment_text }}</td>
+            <td>{{ payment.buy_thing }} Bath</td>
+            <td>{{ payment.pub_date }}</td>
+        </tr>
+    {% endfor %}
+        <tr>
+            <td style="text-align: center;" colspan="3">payment sum</td>
+        </tr>
+        <tr>
+            <td style="text-align: center;" colspan="3">{{ paymentsum }} Bath</td>            
+        </tr>
+{% else %}
+    <p> No data</p>
+{% endif %}
+
+</body>
+</html>

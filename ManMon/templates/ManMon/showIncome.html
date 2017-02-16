@@ -1,0 +1,30 @@
+<html>
+<body bgcolor="#dcbf34" >
+<h1>Income List</h1>
+
+{% if income_list %}
+<table border=1 style="width:50%">
+        <tr>
+            <td>note</td>
+            <td>money</td>
+            <td>date</td>
+        </tr>
+    {% for income in income_list %}
+        <tr>
+            <td>{{ income.income_text }}</td>
+            <td>{{ income.earning }} Bath</td>
+            <td>{{ income.pub_date }}</td>
+        </tr>
+    {% endfor %}
+        <tr>
+            <td style="text-align: center;" colspan="3">income sum</td>
+        </tr>
+        <tr>
+            <td style="text-align: center;" colspan="3">{{ incomesum }} Bath</td>
+        </tr>
+{% else %}
+    <p> No data</p>
+{% endif %}
+
+</body>
+</html>

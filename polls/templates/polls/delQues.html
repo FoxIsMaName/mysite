@@ -1,0 +1,19 @@
+
+
+<html>
+<body bgcolor="#00afff" >
+
+{% if latest_question_list %}
+    <ul>
+    <table border=1 align="center" >
+    {% for question in latest_question_list %}
+        <tr >
+            <td >
+                <li><a  href="{% url 'polls:detail' question.id %}" >{{ question.question_text }}</a></li>
+           </td>
+        </tr>  
+    {% endfor %}
+    </table>
+    </ul>
+</body>
+</html>

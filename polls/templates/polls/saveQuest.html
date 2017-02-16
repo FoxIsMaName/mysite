@@ -1,0 +1,14 @@
+
+<!DOCTYPE html>
+<html>
+<body bgcolor="#00afff" >
+    {% if error_message %}
+        <h1> You have to fill all empty field</h1>
+    {% else %}
+        <h1> Question has been add</h1>
+        <br>{{question}}
+    {% endif %}
+
+<a herf="{% url 'polls:addQues' %}">Do you want to add another question?</a>
+</body>
+</html>

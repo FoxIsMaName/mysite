@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<body bgcolor="#00afff" >
+    <h1>Let add question</h1>
+
+    <form action="{% url 'polls:saveQues' %}" method="post">
+        {% csrf_token %}
+        <input type="text" name="question" />
+        <input type="submit" value="add question" />
+        <br><a href="{% url 'polls:index' %}">back</a>
+    </form>
+</body>
+</html>

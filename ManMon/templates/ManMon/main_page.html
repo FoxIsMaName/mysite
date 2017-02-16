@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.btn-group .button {
+    background-color: #4CAF50; 
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    float: left;
+}
+
+.btn-group .button:hover {
+    background-color: #4CAF00;
+}
+</style>
+</head>
+
+<body bgcolor="#dcbf34" >
+<h2 style = "text-align: center;color:rgb(110, 101, 252);">Manage Your Money</h2>
+
+<div class="btn-group">
+  <a href="{% url 'ManMon:showIncome' %}" class="button" >{{"Income List"}}</a>
+  <a href="{% url 'ManMon:showPayment' %}" class="button" >{{"Payment List"}}</a>
+</div>
+
+<p style = "font-size:130%;clear:both;">Income</p>
+<form action="{% url 'ManMon:saveIncome'%}" method="post">
+{% csrf_token %}
+
+    Note:
+    <input type="text" name="note_income">
+    <br>Income:
+    <input type="number" name="money" step="any">
+    <input type="date" name="dmy_income">
+    <input type="submit">
+
+</form>
+
+
+<p style = "font-size:130%;">Payment</p>
+<form action="{% url 'ManMon:savePayment' %}" method="post">
+{% csrf_token %}
+
+    Note:
+    <input type="text" name="note_payment">
+    <br>Payment:
+    <input type="number" name="payment" step="any">
+    <input type="date" name="dmy_payment">
+    <input type="submit">
+
+</form>
+
+
+<table border=1 style="width:50%">
+        <tr>
+            <td style="text-align: center;" colspan="3">remain money</td>
+        </tr>
+        <tr>
+            <td style="text-align: center;" colspan="3">{{ remain_money }} Bath</td>
+        </tr>
+</body>
+</html>
