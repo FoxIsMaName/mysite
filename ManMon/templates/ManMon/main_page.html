@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load static %}
 <html>
 <head>
 <style>
@@ -8,6 +9,7 @@
     color: white;
     padding: 15px 32px;
     text-align: center;
+    font-style: italic;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
@@ -29,40 +31,49 @@
   <a href="{% url 'ManMon:showPayment' %}" class="button" >{{"Payment List"}}</a>
 </div>
 
-<p style = "font-size:130%;clear:both;">Income</p>
-<form action="{% url 'ManMon:saveIncome'%}" method="post">
-{% csrf_token %}
+    <br> 
+    <p style = "font-size:130%;clear:both;">Income</p>
+    <form action="{% url 'ManMon:saveIncome'%}" method="post">
+    {% csrf_token %}
 
-    Note:
-    <input type="text" name="note_income">
-    <br>Income:
-    <input type="number" name="money" step="any">
-    <input type="date" name="dmy_income">
-    <input type="submit">
+        Note:
+        <input type="text" name="note_income">
+        Type:
+        <select name="type_income">
+        {% for typeincome in type_in_list %}
+            <option for="type_income{{ forloop.counter }}">{{ typeincome.type_income }}</option>
+        {% endfor %}
+        </select> <br>  
+        <br>Income:
+        <input type="number" name="money" step="any">  
+        <input type="datetime-local" name="dmy_income"> <br>  
+        <input type="submit">
 
-</form>
-
-
-<p style = "font-size:130%;">Payment</p>
-<form action="{% url 'ManMon:savePayment' %}" method="post">
-{% csrf_token %}
-
-    Note:
-    <input type="text" name="note_payment">
-    <br>Payment:
-    <input type="number" name="payment" step="any">
-    <input type="date" name="dmy_payment">
-    <input type="submit">
-
-</form>
+    </form>
 
 
-<table border=1 style="width:50%">
+    <p style = "font-size:130%;">Payment</p>
+    <form action="{% url 'ManMon:savePayment' %}" method="post">
+    {% csrf_token %}
+
+        Note:
+        <input type="text" name="note_payment">
+        Type:
+        <select name="type_payment">
+        {% for typepayment in type_pay_list %}
+            <option for="type_payment{{ forloop.counter }}">{{ typepayment.type_payment }}</option>
+        {% endfor %}
+        </select><br>
+        <br>Payment:
+        <input type="number" name="payment" step="any">
+        <input type="datetime-local" name="dmy_payment"><br>
+        <input type="submit">
+    </form>
+
+<br>
+<table border=1 style="width:20%" align="center">
         <tr>
-            <td style="text-align: center;" colspan="3">remain money</td>
-        </tr>
-        <tr>
-            <td style="text-align: center;" colspan="3">{{ remain_money }} Bath</td>
+            <td style="text-align: center;" colspan="1">remain money : {{ remain_money }} Baths</td>
         </tr>
 </body>
 </html>

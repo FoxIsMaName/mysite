@@ -1,10 +1,16 @@
+import datetime
 from django.db import models
+from django.utils import timezone
 
 # Create your models here.
 class Income(models.Model):
     income_text = models.CharField(max_length=200)
     earning = models.IntegerField(default=0)
+    type_income = models.CharField(max_length=200, default='salary')
     pub_date = models.DateTimeField('date published')
+
+    def __str__(self):
+        return self.type_income
 
     def __str__(self):
         return self.income_text
@@ -12,12 +18,13 @@ class Income(models.Model):
     def __int__(self):
         return self.earning 
 
-    def was_published_recently(self):
-        return self.pub_date >= timezone.now() - datetime.timedelta(days=1)
+    def __str__(self):
+        return self.pub_date 
 
 class Payment(models.Model):
     payment_text = models.CharField(max_length=200)
     buy_thing = models.IntegerField(default=0)
+    type_payment = models.CharField(max_length=200, default='food')
     pub_date = models.DateTimeField('date published')
 
     def __str__(self):
@@ -26,21 +33,21 @@ class Payment(models.Model):
     def __int__(self):
         return self.buy_thing
 
-    def was_published_recently(self):
-        return self.pub_date >= timezone.now() - datetime.timedelta(days=1)
-
-class IncomeType(models.Model):
-    income_list = models.ForeignKey(Income, on_delete=models.CASCADE)
-    income_type = models.CharField(max_length=200)
+    def __str__(self):
+        return self.type_payment
 
     def __str__(self):
-        return self.income_type
+        return self.pub_date 
 
-class PaymentType(models.Model):
-    payment_list = models.ForeignKey(Payment, on_delete=models.CASCADE)
-    payment_type = models.CharField(max_length=200)
+class TypeIncome(models.Model):
+    type_income = models.CharField(max_length=200)
+    
+    def __str__(self):
+        return self.type_income
+
+class TypePayment(models.Model):
+    type_payment = models.CharField(max_length=200)
 
     def __str__(self):
-        return self.payment_type
-
+        return self.type_payment
 
