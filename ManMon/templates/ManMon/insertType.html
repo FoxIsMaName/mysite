@@ -1,0 +1,19 @@
+<html>
+<body bgcolor="#dcbf34" >
+<h1 style = "text-align: center;color:rgb(110, 101, 252);">Add Income Type</h1>
+
+
+    <form action="{% url 'ManMon:saveType'%}" method="post">
+    <input type="radio" name="choice" value="income">
+    <label>Income</label>
+    <input type="radio" name="choice" value="payment">
+    <label>Payment</label><br>
+    {% csrf_token %}
+        Type:
+        <input type="text" name="type">
+        </select>
+        <input type="submit">
+    </form>
+<a href="{% url 'ManMon:mainpage' %}"> back to main page</a>
+
+</html>

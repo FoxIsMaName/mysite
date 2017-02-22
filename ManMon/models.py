@@ -10,9 +10,6 @@ class Income(models.Model):
     pub_date = models.DateTimeField('date published')
 
     def __str__(self):
-        return self.type_income
-
-    def __str__(self):
         return self.income_text
 
     def __int__(self):
@@ -21,14 +18,14 @@ class Income(models.Model):
     def __str__(self):
         return self.pub_date 
 
+    def __str__(self):
+        return self.type_income
+
 class Payment(models.Model):
     payment_text = models.CharField(max_length=200)
     buy_thing = models.IntegerField(default=0)
     type_payment = models.CharField(max_length=200, default='food')
     pub_date = models.DateTimeField('date published')
-
-    def __str__(self):
-        return self.payment_text
 
     def __int__(self):
         return self.buy_thing
@@ -38,6 +35,9 @@ class Payment(models.Model):
 
     def __str__(self):
         return self.pub_date 
+
+    def __str__(self):
+        return self.payment_text
 
 class TypeIncome(models.Model):
     type_income = models.CharField(max_length=200)

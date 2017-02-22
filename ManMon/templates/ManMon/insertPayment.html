@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<body bgcolor="#dcbf34" >
+<h2 style = "text-align: center;color:rgb(110, 101, 252);">Manage Your Money</h2>
+
+    <p style = "font-size:130%;">Payment</p>
+    <form action="{% url 'ManMon:savePayment' %}" method="post">
+    {% csrf_token %}
+
+        Note:
+        <input type="text" name="note_payment">
+        Type:
+        <select name="type_payment">
+        {% for typepayment in type_pay_list %}
+            <option for="type_payment{{ forloop.counter }}">{{ typepayment.type_payment }}</option>
+        {% endfor %}
+        </select><br>
+        <br>Payment:
+        <input type="number" name="payment" step="any">
+        <input type="datetime-local" name="dmy_payment"><br>
+        <input type="submit">
+    </form>
+
+
+</body>
+</html>

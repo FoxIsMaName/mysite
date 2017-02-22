@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<body bgcolor="#dcbf34" >
+<h2 style = "text-align: center;color:rgb(110, 101, 252);">Manage Your Money</h2>
+
+
+
+    <br> 
+    <p style = "font-size:130%;clear:both;">Income</p>
+    <form action="{% url 'ManMon:saveIncome'%}" method="post">
+    {% csrf_token %}
+
+        Note:
+        <input type="text" name="note_income">
+        Type:
+        <select name="type_income">
+        {% for typeincome in type_in_list %}
+            <option for="type_income{{ forloop.counter }}">{{ typeincome.type_income }}</option>
+        {% endfor %}
+        </select> <br>  
+        <br>Income:
+        <input type="number" name="money" step="any">  
+        <input type="datetime-local" name="dmy_income"> <br>  
+        <input type="submit">
+
+    </form>
+
+</body>
+</html>

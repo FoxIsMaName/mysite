@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+<style>
+.btn-group .button {
+    background-color: #4CAF50; 
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    font-style: italic;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    float: left;
+}
+
+.btn-group .button:hover {
+    background-color: #4CAF00;
+}
+</style>
+</head>
+
+<body bgcolor="#dcbf34" >
+<h2 style = "text-align: center;color:rgb(110, 101, 252);">Manage Your Money</h2>
+
+<div class="btn-group">
+  <a href="{% url 'ManMon:showIncome' %}" class="button" >{{"Income List"}}</a>
+  <a href="{% url 'ManMon:showPayment' %}" class="button" >{{"Payment List"}}</a>
+  <a href="{% url 'ManMon:callInsertIncome' %}" class="button" >{{"Insert Income"}}</a>
+  <a href="{% url 'ManMon:callInsertPayment' %}" class="button" >{{"Insert Payment"}}</a>
+</div>
+
+<br>
+<table border = 1 >
+<table border=1 style="width:50%;clear:both;" align="center" bgcolor=#00bfff>
+        <tr>
+            <td>Note</td>
+            <td>Money</td>
+            <td>Type</td>
+            <td>Date</td>
+        </tr>
+    {% for income in income_list %}
+        <tr>
+            <td>{{ income.income_text }}</td>
+            <td>{{ income.earning }} Bath</td>
+            <td>{{ income.type_income }}</td>
+            <td>{{ income.pub_date }}</td>
+        </tr>
+    {% endfor %}
+    {% for payment in payment_list %}
+        <tr>
+            <td>{{ payment.payment_text }}</td>
+            <td>{{ payment.buy_thing }} Baths</td>
+            <td>{{ payment.type_payment }}</td>
+            <td>{{ payment.pub_date }}</td>
+        </tr>
+    {% endfor %}
+        <tr>
+            <td style="text-align: center;" colspan="4">remain money : {{ remain_money }} Baths</td>
+        </tr>
+</body>
+</html>
