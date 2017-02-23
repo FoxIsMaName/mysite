@@ -1,7 +1,27 @@
 <!DOCTYPE html>
 {% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'ManMon/style.css' %}" />
 <html>
-<body bgcolor="#dcbf34" >
+<style>
+.button {
+    background-color: #4CAF50; 
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    font-style: italic;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 75%;
+}
+
+.button:hover {
+    background-color: #4CAF00;
+}
+
+</style>
 <h2 style = "text-align: center;color:rgb(110, 101, 252);">Manage Your Money</h2>
 
 
@@ -23,8 +43,9 @@
         <input type="number" name="money" step="any">  
         <input type="datetime-local" name="dmy_income"> <br>  
         <input type="submit">
-
     </form>
+<br>
+<a href="{% url 'ManMon:mainpage' %}" class="button">back to main page</a>
 
 </body>
 </html>

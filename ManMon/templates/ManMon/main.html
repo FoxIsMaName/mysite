@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 {% load static %}
 <html>
+<link rel="stylesheet" type="text/css" href="{% static 'ManMon/style.css' %}" />
 <head>
 <style>
+
 .btn-group .button {
     background-color: #4CAF50; 
     border: none;
@@ -22,8 +24,6 @@
 }
 </style>
 </head>
-
-<body bgcolor="#dcbf34" >
 <h2 style = "text-align: center;color:rgb(110, 101, 252);">Manage Your Money</h2>
 
 <div class="btn-group">
@@ -31,6 +31,7 @@
   <a href="{% url 'ManMon:showPayment' %}" class="button" >{{"Payment List"}}</a>
   <a href="{% url 'ManMon:callInsertIncome' %}" class="button" >{{"Insert Income"}}</a>
   <a href="{% url 'ManMon:callInsertPayment' %}" class="button" >{{"Insert Payment"}}</a>
+  <a href="{% url 'ManMon:callInsertType' %}" class="button">{{"Insert Type"}}</a>
 </div>
 
 <br>

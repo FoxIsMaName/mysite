@@ -4,8 +4,8 @@ from .models import Income, Payment, TypeIncome, TypePayment
 # Create your views here.
 
 def callMainPage(request): 
-    income_list = Income.objects.order_by('-pub_date')[:5]
-    payment_list = Payment.objects.order_by('-pub_date')[:5]
+    income_list = Income.objects.order_by('-pub_date')[:3]
+    payment_list = Payment.objects.order_by('-pub_date')[:3]
 
     #calulation the rest of money
     income_sum = 0
@@ -60,8 +60,16 @@ def saveIncome(request):
     else:
             IN = Income(income_text=note_income, earning=money, type_income = type_income, pub_date=date_income)
             IN.save()
-
     return render(request,"ManMon/showIncome.html",{'income_list':income_list,'incomesum':income_sum})
+    
+def callDelIncome(request):
+    income_list = Income.objects.order_by('-pub_date')
+    return render(request, 'ManMon/delIncome.html', {'income_list':income_list})
+
+def delIncome(request, income_id):
+    income = get_object_or_404(Income, pk=income_id)
+    income.delete()    
+    return render(request, "ManMon/main.html", '')
 
 def callInsertPayment(request):
     type_pay_list = TypePayment.objects.order_by('-type_payment')    
@@ -90,4 +98,29 @@ def savePayment(request):
 
     return render(request,"ManMon/showPayment.html",{'payment_list':payment_list, 'paymentsum':payment_sum})
 
+def delPayment(request, payment_id):
+    payment = Payment.objects.get(pk=payment_id)
+    payment.delete()
+    return render(request, "ManMon/delPayment.html",'')
 
+def callInsertType(request):
+    return render(request,"ManMon/insertType.html",'')
+
+def saveType(request):
+    if(request.POST['choice'] == 'income' ):
+        try:        
+            save_type = request.POST['type']
+        except:
+            in_type = ""
+        else:
+            save_type = TypeIncome(type_income = save_type)
+            save_type.save()
+    if(request.POST['choice'] == 'payment' ):
+        try:
+            save_type = request.POST['type']
+        except:
+            save_type = ""
+        else:
+            save_type = TypePayment(type_payment = save_type)
+            save_type.save()
+    return render(request, "ManMon/saveType.html",{'save_type':save_type})

@@ -1,0 +1,27 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'ManMon/style.css' %}" />
+<html>
+<style>
+.button {
+    background-color: #4CAF50; 
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    font-style: italic;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 75%;
+}
+
+.button:hover {
+    background-color: #4CAF00;
+}
+
+</style>
+<h1>You save:{{save_type}}</h1>
+<a href="{% url 'ManMon:mainpage' %}" class="button"> back to main page</a>
+</body>
+</html>

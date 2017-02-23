@@ -9,9 +9,6 @@ class Income(models.Model):
     type_income = models.CharField(max_length=200, default='salary')
     pub_date = models.DateTimeField('date published')
 
-    def __str__(self):
-        return self.income_text
-
     def __int__(self):
         return self.earning 
 
@@ -20,6 +17,9 @@ class Income(models.Model):
 
     def __str__(self):
         return self.type_income
+
+    def __str__(self):
+        return self.income_text
 
 class Payment(models.Model):
     payment_text = models.CharField(max_length=200)

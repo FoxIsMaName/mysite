@@ -1,10 +1,34 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'ManMon/style.css' %}" />
 <html>
+<style>
+.button {
+    background-color: #4CAF50; 
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    font-style: italic;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 75%;
+}
+
+.button:hover {
+    background-color: #4CAF00;
+}
+
+</style>
 <body bgcolor="#dcbf34" >
 <h1 style="text-align:center">Payment List</h1>
 
+ <a href="{% url 'ManMon:mainpage' %}" class="button">{{"Back to main page"}}</a>
+
 
 {% if payment_list %}
-<table border=1 style="width:50%" align="center" bgcolor=#ff1e14>
+<table border=1 style="width:50%" align="center" bgcolor=#ff1414>
         <tr>
             <td>Note</td>
             <td>Payment</td>
