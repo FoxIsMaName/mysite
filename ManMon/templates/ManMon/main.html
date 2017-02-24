@@ -24,9 +24,10 @@
 }
 </style>
 </head>
-<h2 style = "text-align: center;color:rgb(110, 101, 252);">Manage Your Money</h2>
+<h1 style = "text-align: center;color:rgb(110, 101, 252);">Manage Your Money</h1>
 
 <div class="btn-group">
+  <a href="{% url 'ManMon:accountInput' %}" class="button" >{{"Account Input"}}</a>
   <a href="{% url 'ManMon:showIncome' %}" class="button" >{{"Income List"}}</a>
   <a href="{% url 'ManMon:showPayment' %}" class="button" >{{"Payment List"}}</a>
   <a href="{% url 'ManMon:callInsertIncome' %}" class="button" >{{"Insert Income"}}</a>

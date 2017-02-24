@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.utils import timezone
 from .models import Income, Payment, TypeIncome, TypePayment
+from .models import Account
 # Create your views here.
 
 def callMainPage(request): 
@@ -19,6 +20,21 @@ def callMainPage(request):
     remain_money = income_sum - payment_sum
     return render(request, 'ManMon/main.html',{'remain_money':remain_money,         
                   'income_list':income_list, 'payment_list':payment_list})
+
+def callAccountInput(request):
+    return render(request, 'ManMon/accountInput.html', '')
+
+def callTypePage(request):
+    try:
+        note = request.POST['note']
+        money = request.POST['money']
+        date = request.POST['dmy']
+    except:
+        note_income = ""
+        money = ""
+        date = ""
+    
+    return render(request, 'ManMon/typePage.html',{'note' : note, 'money':money, 'date':date })
 
 #show payment information
 def tableIncome(request):

@@ -24,18 +24,19 @@
 </style>
 <h1 style ="color:rgb(110, 101, 252);">Add Income Type</h1>
 
-
     <form action="{% url 'ManMon:saveType'%}" method="post">
     <input type="radio" name="choice" value="income">
     <label style ="color:rgb(110, 101, 252);">Income</label>
     <input type="radio" name="choice" value="payment">
     <label style ="color:rgb(110, 101, 252);">Payment</label><br>
     {% csrf_token %}
-        Type:
-        <input type="text" name="type">
-        </select>
-        <input type="submit">
+        <p style ="color:rgb(110, 101, 252);">
+            Type:<input type="text" name="type">
+            <input type="submit">
+        </p>
+        
     </form>
+
 <a href="{% url 'ManMon:mainpage' %}" class="button"> back to main page</a>
 
 </html>
