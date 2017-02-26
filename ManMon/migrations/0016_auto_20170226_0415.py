@@ -15,7 +15,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='account',
             name='pub_time',
-            field=models.TimeField(default=0),
+            field=models.TimeField(default="00:00:00"),
         ),
         migrations.AlterField(
             model_name='account',

@@ -7,11 +7,7 @@ class Account(models.Model):
     note = models.CharField(max_length=200)
     money = models.FloatField(default=0)
     type_note = models.CharField(max_length=200, default='salary')
-    pub_date = models.DateField('date published')
-    pub_time = models.TimeField(default='00:00:00')
-
-    def __str__(self):
-        return self.pub_time
+    pub_date = models.DateTimeField('date published')
 
     def __str__(self):
         return self.pub_date

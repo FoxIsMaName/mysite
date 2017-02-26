@@ -6,9 +6,8 @@ app_name = 'ManMon'
 
 urlpatterns = [
     url(r'^$', views.callMainPage, name='mainpage'),
-    url(r'^accountinput$', views.callAccountInput, name='accountInput'),
-    url(r'^typeInput$', views.callTypePage, name="typePage"),
-    url(r'^(?P<note>[a-zA-Zก-ฮะ-์]+)/(?P<money>[0-9]+)/saveAccount', views.saveAccount, name="saveAccount"),
+    url(r'^accountinput$', views.callAccountInput, name='callAccountInput'),
+    url(r'^<choice>[a-z]+/saveAccount$', views.saveAccount, name="saveAccount"),
     url(r'^insertincome$', views.callInsertIncome, name='callInsertIncome'),
     url(r'^insertpayment$', views.callInsertPayment, name='callInsertPayment'),
     url(r'^saveincome$', views.saveIncome, name='saveIncome'),

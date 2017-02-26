@@ -23,45 +23,34 @@ def callMainPage(request):
                   'income_list':income_list, 'payment_list':payment_list})
 
 def callAccountInput(request):
-    return render(request, 'ManMon/accountInput.html', '')
-
-def callTypePage(request):
     type_in_list = TypeIncome.objects.order_by('-type_income')
     type_pay_list = TypePayment.objects.order_by('-type_payment')
     try:
+       if(request.POST['choice'] == 'income'):
+           choice = request.POST['choice']
+           return render(request, 'ManMon/accountInput.html', {'type_in_list':type_in_list, 'choice':choice})
+       else:
+           return render(request, 'ManMon/accountInput.html', {'type_pay_list':type_pay_list, 'choice':choice})
+    except:
+       return render(request, 'ManMon/accountInput.html', '')
+
+def saveAccount(request, choice):
+    try:
         note = request.POST['note']
         money = request.POST['money']
+        type_note = request.POST['type']
         date = request.POST['dmy']
-        choice = request.POST['choice']
     except:
         note = ""
         money = ""
-        date = ""
-        choice = ""
-    print(date)
-    if(choice == 'income' ):
-        return render(request, 'ManMon/typePage.html',{'note' : note, 'money':money, 'date':date, 'choice':choice, 
-                      'type_in_list':type_in_list})
-    else:
-        return render(request, 'ManMon/typePage.html',{'note' : note, 'money':money, 'date':date, 'choice':choice,              
-                      'type_pay_list':type_pay_list})
-
-
-def saveAccount(request, note, money, choice):
-    print(note)
-    print(money)
-    if(choice == 'income' ):
-        #money = (-1)*money
-        print("llllll")
-    try:
-        type_note = request.POST['type']
-    except:
         type_note = ""
-    
-    ac = Account(note = note, money = money, type_note = type_note, pub_date = now())
+        date = ""
+    if(request.POST['choice'] == 'payment'):
+        money = (-1)*money
+    ac = Account(note = note, money = money, type_note = type_note, date = date)
     ac.save()
 
-    return render(request, 'ManMon/complete.html', {'note' : note, 'money':money, 'date':date, 'type':note_type,})    
+    return render(request, 'ManMon/saveAccount.html','')   
 
 #show payment information
 def tableIncome(request):
