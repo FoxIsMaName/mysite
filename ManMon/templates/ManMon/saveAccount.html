@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<h1 style = "text-align:center; font-size:330%;">Manage Your Money</h1>
+<link rel="stylesheet" type="text/css" href="{% static 'ManMon/style.css' %}" />
+<h1>You're already save:</h1>
+<p>Note : {{note}}</p>
+<p>Type : {{note_type}}</p>
+<p>Money : {{money}}</p>
+<p>Date : {{date}}</p>
+<a href="{% url 'ManMon:mainpage'%}" class="circleBtn">{{"back to main page"}}</a>
+</html>

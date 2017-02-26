@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'ManMon/style.css' %}" />
+<html>
+<h2 style = "text-align: center;color:rgb(110, 101, 252);">Manage Your Money</h2>
+
+    <p style = "font-size:130%;">Payment</p>
+    <form action="{% url 'ManMon:callAccountInput' %}" method="post">
+    {% csrf_token %}
+
+        <input type="radio" name="choice" value="income">
+        <label>income</label>
+        <input type="radio" name="choice" value="payment">
+        <label>payment</label>
+        <input type="submit"> 
+    </form>
+
+<a href="{% url 'ManMon:mainpage' %}" class="circleBtn"> {{"back to main page"}} </a>
+
+</body>
+</html>

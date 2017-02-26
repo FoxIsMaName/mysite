@@ -6,21 +6,16 @@ from .models import Account
 # Create your views here.
 
 def callMainPage(request): 
-    income_list = Income.objects.order_by('-pub_date')[:3]
-    payment_list = Payment.objects.order_by('-pub_date')[:3]
+    account_list = Account.objects.order_by('-pub_date')
 
     #calulation the rest of money
-    income_sum = 0
-    payment_sum = 0
+    remain_money = 0
+    for account in account_list :
+        remain_money += account.money
 
-    for income in income_list :
-        income_sum += income.earning
-    for payment in payment_list :
-        payment_sum += payment.buy_thing
-
-    remain_money = income_sum - payment_sum
+    account_list = Account.objects.order_by('-pub_date')[:3]
     return render(request, 'ManMon/main.html',{'remain_money':remain_money,         
-                  'income_list':income_list, 'payment_list':payment_list})
+                  'account_list':account_list})
 
 def callAccountInput(request):
     type_in_list = TypeIncome.objects.order_by('-type_income')
@@ -30,9 +25,10 @@ def callAccountInput(request):
            choice = request.POST['choice']
            return render(request, 'ManMon/accountInput.html', {'type_in_list':type_in_list, 'choice':choice})
        else:
+           choice = request.POST['choice']
            return render(request, 'ManMon/accountInput.html', {'type_pay_list':type_pay_list, 'choice':choice})
     except:
-       return render(request, 'ManMon/accountInput.html', '')
+       return render(request, 'ManMon/chooseInOrPay.html', '')
 
 def saveAccount(request, choice):
     try:
@@ -45,12 +41,20 @@ def saveAccount(request, choice):
         money = ""
         type_note = ""
         date = ""
-    if(request.POST['choice'] == 'payment'):
-        money = (-1)*money
-    ac = Account(note = note, money = money, type_note = type_note, date = date)
+    if(choice == 'payment'):
+        money = (-1)*float(money)
+
+    ac = Account(note = note, money = money, type_note = type_note, pub_date = date)
     ac.save()
 
-    return render(request, 'ManMon/saveAccount.html','')   
+    return render(request, 'ManMon/saveAccount.html',{'note':note, 'money':money, 'type_note':type_note, 'date':date})
+   
+def history(request):
+    account_list = Account.objects.order_by('-pub_date')
+    money_sum = 0
+    for account in account_list :
+        money_sum += account.money
+    return render(request, 'ManMon/history.html', {'account_list':account_list, 'money_sum':money_sum})
 
 #show payment information
 def tableIncome(request):

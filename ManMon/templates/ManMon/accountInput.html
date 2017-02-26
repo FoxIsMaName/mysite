@@ -2,46 +2,13 @@
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'ManMon/style.css' %}" />
 <html>
-<style>
-.button {
-    background-color: #4CAF50; 
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    font-style: italic;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 75%;
-}
-
-.button:hover {
-    background-color: #4CAF00;
-}
-
-</style>
 <h2 style = "text-align: center;color:rgb(110, 101, 252);">Manage Your Money</h2>
 
-    <p style = "font-size:130%;">Payment</p>
-    <form action="{% url 'ManMon:callAccountInput' %}" method="post">
-    {% csrf_token %}
-
-        <input type="radio" name="choice" value="income">
-        <label>income</label>
-        <input type="radio" name="choice" value="payment">
-        <label>payment</label>
-        <input type="submit"> 
-    </form>
-
-    <form action="{% url 'ManMon:saveAccount' %}" method="post">
+    <form action="{% url 'ManMon:saveAccount' choice %}" method="post">
     {% csrf_token %}
         <p>
         Note:
         <input type="text" name="note"></p>
-        Money:
-        <input type="number" name="money" step="any">
         <br>Type:
         {% if type_in_list %}
         <select name="type">            
@@ -50,18 +17,22 @@
             {% endfor %}
         </select>
         {% else %}
-        <select name="type" class="button">
+        <select name="type">
             {% for typepayment in type_pay_list %}
-                <option for="type_income{{ forloop.counter }}">{{ typepayment.type_payment }}</option>
+                <option for="type_payment{{ forloop.counter }}">{{ typepayment.type_payment }}</option>
             {% endfor %}
-        </select>
+        </select>            
         {% endif %}
+        Money:
+        <input type="number" name="money" step="any">
+
         Date:
         <input type="datetime-local" name="dmy"><br>
-        <input type="submit" class="button" >
+        <input type="submit" >
     </form>
 <br>
-<a href="{% url 'ManMon:mainpage' %}" class="button"> {{"back to main page"}} </a>
+
+<a href="{% url 'ManMon:mainpage' %}" class="circleBtn"> {{"back to main page"}} </a>
 
 </body>
 </html>
