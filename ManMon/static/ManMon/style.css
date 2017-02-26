@@ -1,3 +1,32 @@
 body {
     background: white url("images/background4.jpg") no-repeat  ;
 }
+@font-face {
+    font-family: myFirstFont ;
+    src: url(fonts/Pangolin-Regular.ttf);
+}
+
+h1 {
+    font-family: myFirstFont;
+}
+
+td {
+    font-family: myFirstFont;
+}
+.btn-group .button {
+    background-color: #4CAF50; 
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    font-style: italic;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    float: left;
+}
+
+.btn-group .button:hover {
+    background-color: #4CAF00;
+}

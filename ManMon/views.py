@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.utils import timezone
 from .models import Income, Payment, TypeIncome, TypePayment
 from .models import Account
+
 # Create your views here.
 
 def callMainPage(request): 
@@ -25,16 +26,42 @@ def callAccountInput(request):
     return render(request, 'ManMon/accountInput.html', '')
 
 def callTypePage(request):
+    type_in_list = TypeIncome.objects.order_by('-type_income')
+    type_pay_list = TypePayment.objects.order_by('-type_payment')
     try:
         note = request.POST['note']
         money = request.POST['money']
         date = request.POST['dmy']
+        choice = request.POST['choice']
     except:
-        note_income = ""
+        note = ""
         money = ""
         date = ""
+        choice = ""
+    print(date)
+    if(choice == 'income' ):
+        return render(request, 'ManMon/typePage.html',{'note' : note, 'money':money, 'date':date, 'choice':choice, 
+                      'type_in_list':type_in_list})
+    else:
+        return render(request, 'ManMon/typePage.html',{'note' : note, 'money':money, 'date':date, 'choice':choice,              
+                      'type_pay_list':type_pay_list})
+
+
+def saveAccount(request, note, money, choice):
+    print(note)
+    print(money)
+    if(choice == 'income' ):
+        #money = (-1)*money
+        print("llllll")
+    try:
+        type_note = request.POST['type']
+    except:
+        type_note = ""
     
-    return render(request, 'ManMon/typePage.html',{'note' : note, 'money':money, 'date':date })
+    ac = Account(note = note, money = money, type_note = type_note, pub_date = now())
+    ac.save()
+
+    return render(request, 'ManMon/complete.html', {'note' : note, 'money':money, 'date':date, 'type':note_type,})    
 
 #show payment information
 def tableIncome(request):

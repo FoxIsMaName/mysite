@@ -1,3 +1,22 @@
+<html>
 {{note}}
-{{money}}
-{{date}}
+    <form action="{% url 'ManMon:saveAccount' note money date %}" method="post">
+        {% csrf_token %}
+        Type:
+        {%if type_in_list %}
+            <select name="type">
+            {% for typeincome in type_in_list %}
+                <option for="type_income{{ forloop.counter }}">{{ typeincome.type_income }}</option>
+            {% endfor %}
+            </select> <br>
+        {% else %}
+            <select name="type">
+            {% for typepayment in type_pay_list %}
+                <option for="type_payment{{ forloop.counter }}">{{ typeincome.type_payment }}</option>
+            {% endfor %}
+            </select> <br>
+        {% endif %}           
+          
+        <input type="submit">
+    </form>
+</html>
