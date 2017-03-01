@@ -8,14 +8,13 @@ body {
 
 h1 {
     font-family: myFirstFont;
+    color:rgb(110, 101, 252);
 }
 p {
     font-family: myFirstFont;
     color:rgb(0, 191, 255);
 }
-td {
-    font-family: myFirstFont;
-}
+
 .btn-group .button {
     background-color: #4CAF50; 
     border: none;

@@ -1,7 +1,23 @@
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'ManMon/style.css' %}" />
 <html>
+<style>
+table {
+    border-collapse: collapse;
+    width: 50%;
+}
 
+th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+tr:hover {background-color: #f5f5f5}
+tr:nth-child(even) {background-color: #ff0055}
+
+
+</style>
 
 <h1 style="text-align:center">History</h1>
 

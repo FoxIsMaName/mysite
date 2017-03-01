@@ -1,7 +1,8 @@
+import csv
 from django.shortcuts import render
 from django.utils import timezone
-from .models import Income, Payment, TypeIncome, TypePayment
-from .models import Account
+from django.http import HttpResponse
+from .models import Account, TypeIncome, TypePayment
 
 # Create your views here.
 
@@ -13,24 +14,17 @@ def callMainPage(request):
     for account in account_list :
         remain_money += account.money
 
-    account_list = Account.objects.order_by('-pub_date')[:3]
+    account_list = Account.objects.order_by('-pub_date')[:5]
     return render(request, 'ManMon/main.html',{'remain_money':remain_money,         
                   'account_list':account_list})
 
 def callAccountInput(request):
     type_in_list = TypeIncome.objects.order_by('-type_income')
     type_pay_list = TypePayment.objects.order_by('-type_payment')
-    try:
-       if(request.POST['choice'] == 'income'):
-           choice = request.POST['choice']
-           return render(request, 'ManMon/accountInput.html', {'type_in_list':type_in_list, 'choice':choice})
-       else:
-           choice = request.POST['choice']
-           return render(request, 'ManMon/accountInput.html', {'type_pay_list':type_pay_list, 'choice':choice})
-    except:
-       return render(request, 'ManMon/chooseInOrPay.html', '')
 
-def saveAccount(request, choice):
+    return render(request, 'ManMon/accountInput.html', {'type_in_list':type_in_list,'type_pay_list':type_pay_list})
+
+def saveAccount(request):
     try:
         note = request.POST['note']
         money = request.POST['money']
@@ -41,7 +35,7 @@ def saveAccount(request, choice):
         money = ""
         type_note = ""
         date = ""
-    if(choice == 'payment'):
+    if(request.POST['choice'] == 'payment'):
         money = (-1)*float(money)
 
     ac = Account(note = note, money = money, type_note = type_note, pub_date = date)
@@ -76,3 +70,15 @@ def saveType(request):
             save_type = TypePayment(type_payment = save_type)
             save_type.save()
     return render(request, "ManMon/saveType.html",{'save_type':save_type})
+
+def getCSV(request):
+    account_list = Account.objects.order_by('pub_date')
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="ManMon.csv"'
+
+    writer = csv.writer(response)
+    writer.writerow(['note', 'money', 'type', 'date'])
+    for account in account_list :
+        writer.writerow([account.note, account.money, account.type_note, account.pub_date])
+
+    return response
