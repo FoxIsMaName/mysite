@@ -3,6 +3,7 @@
 <link rel="stylesheet" type="text/css" href="{% static 'ManMon/style.css' %}" />
 <html>
 <style>
+
 table {
     border-collapse: collapse;
     width: 50%;
@@ -17,17 +18,17 @@ th, td {
 tr:hover {background-color: #f5f5f5}
 tr:nth-child(even) {background-color: #ff0055}
 
-
 </style>
 
 
-<h1 style = "text-align: center;color:rgb(110, 101, 252);">Manage Your Money</h1>
+<h1 style = "text-align: center;">Manage Your Money</h1>
 
 <div class="btn-group">
   <a href="{% url 'ManMon:callAccountInput' %}" class="button" >{{"Account Input"}}</a>
   <a href="{% url 'ManMon:history' %}" class="button" >{{"history"}}</a>
   <a href="{% url 'ManMon:callInsertType' %}" class="button">{{"Insert Type"}}</a>
-  <a href="{% url 'ManMon:getCSV' %} " class="button">{{"export"}}</a>
+  <a href="{% url 'ManMon:getCSV' %} " class="button">{{"Export"}}</a>
+  <a href="{% url 'ManMon:uploadFile'%}" class="button">{{"Upload"}}</a>
 </div>
 
 <br>
@@ -41,7 +42,7 @@ tr:nth-child(even) {background-color: #ff0055}
     {% for account in account_list %}
         <tr>
             <td>{{ account.note }}</td>
-            <td>{{ account.money }} Bath</td>
+            <td>{{ account.money }} Baths</td>
             <td>{{ account.type_note }}</td>
             <td>{{ account.pub_date }}</td>
         </tr>

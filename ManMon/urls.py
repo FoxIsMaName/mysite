@@ -12,4 +12,6 @@ urlpatterns = [
     url(r'^exportHistory$', views.getCSV, name='getCSV'),
     url(r'^insertType/$', views.callInsertType, name='callInsertType'),
     url(r'^saveType/$', views.saveType, name='saveType'),
+    url(r'^uploadFile/$', views.upload_file, name="uploadFile"),
+    url(r'^uploaded/$', views.handle_uploaded_file, name="uploaded"),
 ]

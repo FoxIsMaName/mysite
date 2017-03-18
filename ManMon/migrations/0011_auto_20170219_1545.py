@@ -14,14 +14,5 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.AlterField(
-            model_name='typeincome',
-            name='income',
-            field=models.ForeignKey(default=ManMon.models.Income, on_delete=django.db.models.deletion.CASCADE, to='ManMon.Income'),
-        ),
-        migrations.AlterField(
-            model_name='typepayment',
-            name='payment',
-            field=models.ForeignKey(default=ManMon.models.Payment, on_delete=django.db.models.deletion.CASCADE, to='ManMon.Payment'),
-        ),
+
     ]

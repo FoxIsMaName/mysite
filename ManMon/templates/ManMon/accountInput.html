@@ -3,7 +3,7 @@
 <link rel="stylesheet" type="text/css" href="{% static 'ManMon/style.css' %}" />
 <html>
 <body>
-<h2 style = "text-align: center;color:rgb(110, 101, 252);">Manage Your Money</h2>
+<h1 style = "text-align: center;">Manage Your Money</h1>
 
     <form action="{% url 'ManMon:saveAccount' %}" method="post">
     {% csrf_token %}
